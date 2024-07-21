@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AutoHook.AutoSpear;
 using AutoHook.Configurations;
 using AutoHook.Fishing;
 using AutoHook.IPC;
@@ -12,6 +13,7 @@ using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using ECommons;
 using ECommons.Automation.NeoTaskManager;
+using ECommons.Reflection;
 using PunishLib;
 
 namespace AutoHook;
@@ -53,12 +55,14 @@ public class AutoHook : IDalamudPlugin
     private static AutoGig _autoGig = null!;
 
     public readonly FishingManager HookManager;
+    public readonly AutoSpearRunner AutoSpear;
 
     public AutoHookIPC AutoHookIpc;
 
     public AutoHook(IDalamudPluginInterface pluginInterface)
     {
         ECommonsMain.Init(pluginInterface, this, Module.All);
+        DalamudReflector.RegisterOnInstalledPluginsChangedEvents(CheckIPC);
         Service.Initialize(pluginInterface);
         PunishLibMain.Init(pluginInterface, "AutoHook",
             new AboutPlugin() { Developer = "InitialDet", Sponsor = "https://ko-fi.com/initialdet" });
@@ -86,10 +90,17 @@ public class AutoHook : IDalamudPlugin
         
         HookManager = new FishingManager();
         AutoHookIpc = new AutoHookIPC();
+        AutoSpear = new();
 
 #if (DEBUG)
         OnOpenConfigUi();
 #endif
+    }
+
+    private void CheckIPC()
+    {
+        if (DalamudReflector.TryGetDalamudPlugin(NavmeshIPC.Name, out var _, false, true))
+            NavmeshIPC.Init();
     }
 
     private void OnCommand(string command, string args)
@@ -173,6 +184,7 @@ public class AutoHook : IDalamudPlugin
     {
         _pluginUi.Dispose();
         _autoGig.Dispose();
+        AutoSpear.Dispose();
         HookManager.Dispose();
         Service.Save();
         Service.PluginInterface.UiBuilder.Draw -= Service.WindowSystem.Draw;

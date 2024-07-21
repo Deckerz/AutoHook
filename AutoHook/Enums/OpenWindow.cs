@@ -9,5 +9,6 @@ public enum OpenWindow
     Settings,
     About,
     Debug,
-    Community
+    Community,
+    AutoSpear
 }

@@ -13,6 +13,7 @@ using AutoHook.Fishing;
 using AutoHook.Resources.Localization;
 using AutoHook.Spearfishing;
 using AutoHook.Utils;
+using AutoHook.AutoSpear;
 
 namespace AutoHook.Configurations;
 
@@ -29,6 +30,8 @@ public class Configuration : IPluginConfiguration
     public FishingPresets HookPresets = new();
 
     public SpearFishingPresets AutoGigConfig = new();
+    
+    public AutoSpearPresets AutoSpearConfig = new();
 
     public bool ShowDebugConsole = false;
 

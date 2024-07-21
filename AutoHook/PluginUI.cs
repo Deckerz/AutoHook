@@ -22,6 +22,7 @@ using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using ECommons.ImGuiMethods;
 using ThreadLoadImageHandler = ECommons.ImGuiMethods.ThreadLoadImageHandler;
+using AutoHook.AutoSpear.Ui;
 
 namespace AutoHook;
 
@@ -31,6 +32,7 @@ public class PluginUi : Window, IDisposable
     {
         new TabFishingPresets(),
         new TabAutoGig(),
+        new TabAutoSpear(),
         new TabCommunity(),
         new TabSettings()
     };

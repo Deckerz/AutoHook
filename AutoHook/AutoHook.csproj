@@ -42,9 +42,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None  Include="Data\FishData\*">
+        <None Include="Data\FishData\*">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None >
+        </None>
         <None Update="images\Fishy.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
@@ -56,9 +56,9 @@
     <!-- Localization -->
 
     <ItemGroup>
-        <PackageReference Include="DalamudPackager" Version="2.1.13"/>
+        <PackageReference Include="DalamudPackager" Version="2.1.13" />
         <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
-        <ProjectReference Include="..\PunishLib\PunishLib\PunishLib.csproj"/>
+        <ProjectReference Include="..\PunishLib\PunishLib\PunishLib.csproj" />
         <Reference Include="FFXIVClientStructs">
             <HintPath>$(DalamudLibPath)FFXIVClientStructs.dll</HintPath>
             <Private>false</Private>

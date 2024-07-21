@@ -34,7 +34,8 @@ public class Service
     [PluginService] public static IPluginLog  PluginLog { get; private set; } = null!;
     [PluginService] public static ICondition Condition { get;private set; } = null!;
     [PluginService] public static ITargetManager TargetManager { get; private set; } = null!;
-    
+    [PluginService] public static IObjectTable ObjectTable { get; private set; } = null!;
+
     public static BaitManager BaitManager { get; set; } = null!;
     public static Configuration Configuration { get; set; } = null!;
     public static WindowSystem WindowSystem { get; } = new(PluginName);
